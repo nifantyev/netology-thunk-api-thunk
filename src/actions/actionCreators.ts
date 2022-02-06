@@ -5,17 +5,17 @@ import {
   UPDATE_EDIT_SERVICE_PROP,
 } from './actionTypes';
 
-export function putServices(
-  services: { id: number; name: string; price: number }[]
-) {
+import { AsyncOperationStatus, Service } from '../types';
+
+export function putServices(services: Service[]) {
   return { type: PUT_SERVICES, payload: services };
 }
 
-export function setServicesLoadingStatus(status: string) {
+export function setServicesLoadingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICES_LOADING_STATUS, payload: status };
 }
 
-export function setServicesSavingStatus(status: string) {
+export function setServicesSavingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICE_SAVING_STATUS, payload: status };
 }
 

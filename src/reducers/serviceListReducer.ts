@@ -3,11 +3,11 @@ import {
   SET_SERVICES_LOADING_STATUS,
 } from '../actions/actionTypes';
 
-import { AsyncOperationStatus } from '../types';
+import { AsyncOperationStatus, Service } from '../types';
 
 interface ServiceListState {
   loadingStatus: AsyncOperationStatus;
-  services: { id: number; name: string; price: number }[];
+  services: Service[];
 }
 
 const initialState = {
