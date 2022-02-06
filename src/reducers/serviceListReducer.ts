@@ -1,6 +1,6 @@
 import {
   PUT_SERVICE_LIST,
-  SET_SERVICES_LOADING_STATUS,
+  SET_SERVICE_LIST_LOADING_STATUS,
 } from '../actions/actionTypes';
 
 import { AsyncOperationStatus, Service } from '../types';
@@ -22,7 +22,7 @@ export default function serviceListReducer(
   switch (action.type) {
     case PUT_SERVICE_LIST:
       return { ...state, services: action.payload };
-    case SET_SERVICES_LOADING_STATUS:
+    case SET_SERVICE_LIST_LOADING_STATUS:
       return { ...state, loadingStatus: action.payload };
     default:
       return state;
