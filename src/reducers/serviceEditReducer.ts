@@ -2,21 +2,15 @@ import {
   SET_SERVICE_SAVING_STATUS,
   UPDATE_EDIT_SERVICE_PROP,
 } from '../actions/actionTypes';
-import { AsyncOperationStatus } from '../types';
+import { AsyncOperationStatus, ServiceFull } from '../types';
 
 interface ServiceEditState {
-  id: number;
-  name: string;
-  price: number;
-  content: string;
+  service: ServiceFull;
   savingStatus: AsyncOperationStatus;
 }
 
 const initialState = {
-  id: 0,
-  name: '',
-  price: 0,
-  content: '',
+  service: { id: 0, name: '', price: 0, content: '' } as ServiceFull,
   savingStatus: 'idle',
 } as ServiceEditState;
 
@@ -29,7 +23,7 @@ export default function serviceEditReducer(
       return { ...state, savingStatus: action.payload };
     case UPDATE_EDIT_SERVICE_PROP:
       const { name, value } = action.payload;
-      return { ...state, [name]: value };
+      return { ...state, service: { ...state.service, [name]: value } };
     default:
       return state;
   }

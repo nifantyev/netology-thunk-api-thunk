@@ -5,3 +5,7 @@ export interface Service {
   name: string;
   price: number;
 }
+
+export interface ServiceFull extends Service {
+  content: string;
+}
