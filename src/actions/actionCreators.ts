@@ -21,7 +21,7 @@ export function setServiceLoadingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICE_LOADING_STATUS, payload: status };
 }
 
-export function setServicesSavingStatus(status: AsyncOperationStatus) {
+export function setServiceSavingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICE_SAVING_STATUS, payload: status };
 }
 
