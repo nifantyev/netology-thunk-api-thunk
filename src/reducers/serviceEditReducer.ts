@@ -1,6 +1,7 @@
 import {
   SET_SERVICE_SAVING_STATUS,
   UPDATE_EDIT_SERVICE_PROP,
+  EDIT_SERVICE,
 } from '../actions/actionTypes';
 import { AsyncOperationStatus, ServiceFull } from '../types';
 
@@ -24,6 +25,8 @@ export default function serviceEditReducer(
     case UPDATE_EDIT_SERVICE_PROP:
       const { name, value } = action.payload;
       return { ...state, service: { ...state.service, [name]: value } };
+    case EDIT_SERVICE:
+      return { ...state, service: action.payload };
     default:
       return state;
   }
