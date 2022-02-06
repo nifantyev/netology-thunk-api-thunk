@@ -1,6 +1,6 @@
 import {
   EDIT_SERVICE,
-  PUT_SERVICES,
+  PUT_SERVICE_LIST,
   SET_SERVICES_LOADING_STATUS,
   SET_SERVICE_LOADING_STATUS,
   SET_SERVICE_SAVING_STATUS,
@@ -9,8 +9,8 @@ import {
 
 import { AsyncOperationStatus, Service, ServiceFull } from '../types';
 
-export function putServices(services: Service[]) {
-  return { type: PUT_SERVICES, payload: services };
+export function putServiceList(services: Service[]) {
+  return { type: PUT_SERVICE_LIST, payload: services };
 }
 
 export function setServicesLoadingStatus(status: AsyncOperationStatus) {

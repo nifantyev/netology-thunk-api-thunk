@@ -1,5 +1,5 @@
 import {
-  PUT_SERVICES,
+  PUT_SERVICE_LIST,
   SET_SERVICES_LOADING_STATUS,
 } from '../actions/actionTypes';
 
@@ -20,7 +20,7 @@ export default function serviceListReducer(
   action: { type: string; payload: any }
 ) {
   switch (action.type) {
-    case PUT_SERVICES:
+    case PUT_SERVICE_LIST:
       return { ...state, services: action.payload };
     case SET_SERVICES_LOADING_STATUS:
       return { ...state, loadingStatus: action.payload };
