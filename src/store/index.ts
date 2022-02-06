@@ -1,14 +1,21 @@
-import { createStore, combineReducers } from 'redux';
-import serviceListReducer from '../reducers/serviceListReducer';
-import serviceEditReducer from '../reducers/serviceEditReducer';
+import { createStore, combineReducers, Store } from 'redux';
+import serviceListReducer, {
+  ServiceListState,
+} from '../reducers/serviceListReducer';
+import serviceEditReducer, {
+  ServiceEditState,
+} from '../reducers/serviceEditReducer';
+
+interface AppState {
+  serviceList: ServiceListState;
+  serviceEdit: ServiceEditState;
+}
 
 const rootReducer = combineReducers({
   serviceList: serviceListReducer,
   serviceEdit: serviceEditReducer,
 });
 
-const store = createStore(rootReducer);
-
-export type RootState = ReturnType<typeof store.getState>;
+const store: Store<AppState> = createStore(rootReducer);
 
 export default store;

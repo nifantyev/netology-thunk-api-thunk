@@ -5,7 +5,7 @@ import {
 
 import { AsyncOperationStatus, Service } from '../types';
 
-interface ServiceListState {
+export interface ServiceListState {
   loadingStatus: AsyncOperationStatus;
   services: Service[];
 }

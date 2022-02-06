@@ -6,7 +6,7 @@ import {
 } from '../actions/actionTypes';
 import { AsyncOperationStatus, ServiceFull } from '../types';
 
-interface ServiceEditState {
+export interface ServiceEditState {
   service: ServiceFull;
   loadingStatus: AsyncOperationStatus;
   savingStatus: AsyncOperationStatus;
