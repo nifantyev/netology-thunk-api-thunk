@@ -2,6 +2,7 @@ import {
   EDIT_SERVICE,
   PUT_SERVICES,
   SET_SERVICES_LOADING_STATUS,
+  SET_SERVICE_LOADING_STATUS,
   SET_SERVICE_SAVING_STATUS,
   UPDATE_EDIT_SERVICE_PROP,
 } from './actionTypes';
@@ -14,6 +15,10 @@ export function putServices(services: Service[]) {
 
 export function setServicesLoadingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICES_LOADING_STATUS, payload: status };
+}
+
+export function setServiceLoadingStatus(status: AsyncOperationStatus) {
+  return { type: SET_SERVICE_LOADING_STATUS, payload: status };
 }
 
 export function setServicesSavingStatus(status: AsyncOperationStatus) {
