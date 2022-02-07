@@ -5,6 +5,7 @@ import {
   setServiceLoadingStatus,
   editService,
   setServiceSavingStatus,
+  setServiceDeletingStatus,
 } from '../actions/actionCreators';
 import { ServiceFull } from '../types';
 
@@ -64,6 +65,7 @@ export async function updateService(service: ServiceFull) {
 
 export async function deleteService(id: number) {
   try {
+    dispatch(setServiceDeletingStatus(id, 'pending'));
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/services/${id}`,
       {
@@ -73,5 +75,8 @@ export async function deleteService(id: number) {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-  } catch (e) {}
+    dispatch(setServiceDeletingStatus(id, 'success'));
+  } catch (e) {
+    dispatch(setServiceDeletingStatus(id, 'error'));
+  }
 }

@@ -1,6 +1,7 @@
 import {
   EDIT_SERVICE,
   PUT_SERVICE_LIST,
+  SET_SERVICE_DELETING_STATUS,
   SET_SERVICE_LIST_LOADING_STATUS,
   SET_SERVICE_LOADING_STATUS,
   SET_SERVICE_SAVING_STATUS,
@@ -15,6 +16,13 @@ export function putServiceList(services: Service[]) {
 
 export function setServiceListLoadingStatus(status: AsyncOperationStatus) {
   return { type: SET_SERVICE_LIST_LOADING_STATUS, payload: status };
+}
+
+export function setServiceDeletingStatus(
+  id: number,
+  status: AsyncOperationStatus
+) {
+  return { type: SET_SERVICE_DELETING_STATUS, payload: { id, status } };
 }
 
 export function setServiceLoadingStatus(status: AsyncOperationStatus) {

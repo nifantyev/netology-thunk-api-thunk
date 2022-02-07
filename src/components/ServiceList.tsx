@@ -9,7 +9,10 @@ import Spinner from './Spinner';
 export default function ServiceList() {
   const navigate = useNavigate();
   const loadingStatus = useAppSelector(
-    (state) => state.serviceList.loadingStatus
+    (store) => store.serviceList.loadingStatus
+  );
+  const deletingStatuses = useAppSelector(
+    (store) => store.serviceList.deletingStatuses
   );
   const services = useAppSelector((store) => store.serviceList.services);
   const [update, setUpdate] = useState(Date.now());
@@ -43,7 +46,7 @@ export default function ServiceList() {
   return (
     <div className="list-group">
       {loadingStatus === 'success' &&
-        services.map((o) => (
+        services.map((o, i) => (
           <div
             key={o.id}
             className="list-group-item d-flex justify-content-between align-items-center"
@@ -51,20 +54,28 @@ export default function ServiceList() {
             <span>
               {o.name}: {o.price}
             </span>
-            <div>
-              <button
-                className="btn btn-primary me-1"
-                onClick={() => handleEdit(o.id)}
-              >
-                <EditIcon />
-              </button>
-              <button
-                className="btn btn-danger"
-                onClick={() => handleDelete(o.id)}
-              >
-                <DeleteIcon />
-              </button>
-            </div>
+            {deletingStatuses[i] !== 'pending' ? (
+              <div>
+                <button
+                  className="btn btn-primary me-1"
+                  onClick={() => handleEdit(o.id)}
+                >
+                  <EditIcon />
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDelete(o.id)}
+                >
+                  <DeleteIcon />
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button className="btn btn-danger" disabled>
+                  <Spinner small={true} />
+                </button>
+              </div>
+            )}
           </div>
         ))}
     </div>
