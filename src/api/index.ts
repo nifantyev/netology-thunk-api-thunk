@@ -29,7 +29,7 @@ export async function getService(id: number) {
   try {
     dispatch(setServiceLoadingStatus('pending'));
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/services/${id}}`
+      `${process.env.REACT_APP_API_URL}/services/${id}`
     );
     if (!response.ok) {
       throw new Error(response.statusText);
