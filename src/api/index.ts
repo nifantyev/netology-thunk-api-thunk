@@ -45,7 +45,7 @@ export async function getService(id: number) {
 export async function updateService(service: ServiceFull) {
   try {
     dispatch(setServiceSavingStatus('pending'));
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/services}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/services`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
