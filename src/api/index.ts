@@ -60,3 +60,17 @@ export async function updateService(service: ServiceFull) {
     dispatch(setServiceSavingStatus('error'));
   }
 }
+
+export async function deleteService(id: number) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/services/${id}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+  } catch (e) {}
+}
