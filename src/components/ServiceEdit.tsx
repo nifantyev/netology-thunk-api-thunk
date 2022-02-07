@@ -51,11 +51,11 @@ export default function ServiceEdit() {
   };
 
   if (loadingStatus === 'pending') {
-    return <Spinner />;
-  }
-
-  if (savingStatus === 'pending') {
-    return <Spinner />;
+    return (
+      <div className="text-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

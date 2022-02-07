@@ -29,7 +29,11 @@ export default function ServiceList() {
   };
 
   if (loadingStatus === 'pending') {
-    return <Spinner />;
+    return (
+      <div className="text-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (loadingStatus === 'error') {
