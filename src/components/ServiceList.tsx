@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getServices, deleteService } from '../api';
 import { useAppSelector } from '../hooks';
+import ErrorMessage from './ErrorMessage';
 import { EditIcon, DeleteIcon } from './Icons';
 import Spinner from './Spinner';
 
@@ -32,11 +33,7 @@ export default function ServiceList() {
   }
 
   if (loadingStatus === 'error') {
-    return (
-      <div className="list-group-item list-group-item-danger">
-        Произошла ошибка!
-      </div>
-    );
+    return <ErrorMessage message="Произошла ошибка!" />;
   }
 
   return (
