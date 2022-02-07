@@ -58,6 +58,7 @@ export async function updateService(service: ServiceFull) {
     dispatch(setServiceSavingStatus('success'));
   } catch (e) {
     dispatch(setServiceSavingStatus('error'));
+    throw e;
   }
 }
 
