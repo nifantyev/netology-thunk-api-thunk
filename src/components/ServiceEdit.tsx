@@ -79,6 +79,7 @@ export default function ServiceEdit() {
               name="name"
               value={service.name}
               onChange={handleChange}
+              disabled={savingStatus === 'pending'}
             />
           </div>
           <div className="mb-3">
@@ -92,6 +93,7 @@ export default function ServiceEdit() {
               name="price"
               value={service.price}
               onChange={handleChange}
+              disabled={savingStatus === 'pending'}
             />
           </div>
           <div className="mb-3">
@@ -105,17 +107,28 @@ export default function ServiceEdit() {
               name="content"
               value={service.content}
               onChange={handleChange}
+              disabled={savingStatus === 'pending'}
             />
           </div>
           <button
             type="button"
-            className="btn btn-secondary me-1"
+            className="btn btn-secondary me-2"
             onClick={handleCancel}
+            disabled={savingStatus === 'pending'}
           >
             Отмена
           </button>
-          <button type="submit" className="btn btn-primary">
-            Сохранить
+
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={savingStatus === 'pending'}
+          >
+            {savingStatus === 'pending' ? (
+              <Spinner small={true} />
+            ) : (
+              'Сохранить'
+            )}
           </button>
         </form>
       )}
