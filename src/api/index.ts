@@ -1,82 +1,91 @@
-import store from '../store';
+import { AppThunk } from '../store';
+import { ServiceFull } from '../types';
 import {
+  editService,
   putServiceList,
   setServiceListLoadingStatus,
-  setServiceLoadingStatus,
-  editService,
-  setServiceSavingStatus,
   setServiceDeletingStatus,
+  setServiceLoadingStatus,
+  setServiceSavingStatus,
 } from '../actions/actionCreators';
-import { ServiceFull } from '../types';
 
-const { dispatch } = store;
-
-export async function getServices() {
-  try {
-    dispatch(setServiceListLoadingStatus('pending'));
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/services`);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    dispatch(putServiceList(data));
-    dispatch(setServiceListLoadingStatus('success'));
-  } catch (e) {
-    dispatch(setServiceListLoadingStatus('error'));
-  }
-}
-
-export async function getService(id: number) {
-  try {
-    dispatch(setServiceLoadingStatus('pending'));
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/services/${id}`
-    );
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    dispatch(editService(data));
-    dispatch(setServiceLoadingStatus('success'));
-  } catch (e) {
-    dispatch(setServiceLoadingStatus('error'));
-  }
-}
-
-export async function updateService(service: ServiceFull) {
-  try {
-    dispatch(setServiceSavingStatus('pending'));
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/services`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(service),
-    });
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    dispatch(setServiceSavingStatus('success'));
-  } catch (e) {
-    dispatch(setServiceSavingStatus('error'));
-    throw e;
-  }
-}
-
-export async function deleteService(id: number) {
-  try {
-    dispatch(setServiceDeletingStatus(id, 'pending'));
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/services/${id}`,
-      {
-        method: 'DELETE',
+export function getServices(): AppThunk<Promise<void>> {
+  return async function getServicesThunk(dispatch, getState) {
+    try {
+      dispatch(setServiceListLoadingStatus('pending'));
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/services`);
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    );
-    if (!response.ok) {
-      throw new Error(response.statusText);
+      const data = await response.json();
+      dispatch(putServiceList(data));
+      dispatch(setServiceListLoadingStatus('success'));
+    } catch (e) {
+      dispatch(setServiceListLoadingStatus('error'));
     }
-    dispatch(setServiceDeletingStatus(id, 'success'));
-  } catch (e) {
-    dispatch(setServiceDeletingStatus(id, 'error'));
-  }
+  };
+}
+
+export function getService(id: number): AppThunk<Promise<void>> {
+  return async function getServiceThunk(dispatch, getState) {
+    try {
+      dispatch(setServiceLoadingStatus('pending'));
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/services/${id}`
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      dispatch(editService(data));
+      dispatch(setServiceLoadingStatus('success'));
+    } catch (e) {
+      dispatch(setServiceLoadingStatus('error'));
+    }
+  };
+}
+
+export function updateService(service: ServiceFull): AppThunk<Promise<void>> {
+  return async function updateServiceThunk(dispatch, getState) {
+    try {
+      dispatch(setServiceSavingStatus('pending'));
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/services`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(service),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      dispatch(setServiceSavingStatus('success'));
+    } catch (e) {
+      dispatch(setServiceSavingStatus('error'));
+      throw e;
+    }
+  };
+}
+
+export function deleteService(id: number): AppThunk<Promise<void>> {
+  return async function deleteServiceThunk(dispatch, getState) {
+    try {
+      dispatch(setServiceDeletingStatus(id, 'pending'));
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/services/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      dispatch(setServiceDeletingStatus(id, 'success'));
+    } catch (e) {
+      dispatch(setServiceDeletingStatus(id, 'error'));
+    }
+  };
 }

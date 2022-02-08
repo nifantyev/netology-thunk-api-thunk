@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getServices, deleteService } from '../api';
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import ErrorMessage from './ErrorMessage';
 import { EditIcon, DeleteIcon } from './Icons';
 import Spinner from './Spinner';
 
 export default function ServiceList() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const loadingStatus = useAppSelector(
     (store) => store.serviceList.loadingStatus
   );
@@ -18,17 +19,16 @@ export default function ServiceList() {
   const [update, setUpdate] = useState(Date.now());
 
   useEffect(() => {
-    getServices();
-  }, [update]);
+    dispatch(getServices());
+  }, [update, dispatch]);
 
   const handleEdit = (id: number) => {
     navigate(`/services/${id}`);
   };
 
-  const handleDelete = (id: number) => {
-    deleteService(id).then(() => {
-      setUpdate(Date.now());
-    });
+  const handleDelete = async (id: number) => {
+    await dispatch(deleteService(id));
+    setUpdate(Date.now());
   };
 
   if (loadingStatus === 'pending') {

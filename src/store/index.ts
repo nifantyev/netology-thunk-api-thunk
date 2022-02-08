@@ -1,4 +1,13 @@
-import { createStore, combineReducers, Store } from 'redux';
+import {
+  createStore,
+  combineReducers,
+  Store,
+  applyMiddleware,
+  AnyAction,
+} from 'redux';
+import thunk from 'redux-thunk';
+import { Action } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import serviceListReducer, {
   ServiceListState,
 } from '../reducers/serviceListReducer';
@@ -16,9 +25,15 @@ const rootReducer = combineReducers({
   serviceEdit: serviceEditReducer,
 });
 
-const store: Store<AppState> = createStore(rootReducer);
+const store: Store<AppState> = createStore(rootReducer, applyMiddleware(thunk));
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
+export type AppDispatch = typeof store.dispatch &
+  ThunkDispatch<RootState, null, AnyAction>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 export default store;

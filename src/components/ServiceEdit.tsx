@@ -28,21 +28,17 @@ export default function ServiceEdit() {
   }, [dispatch]);
 
   useEffect(() => {
-    getService(Number(id));
-  }, [id]);
+    dispatch(getService(Number(id)));
+  }, [id, dispatch]);
 
   const handleCancel = () => {
     navigate('/services');
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    updateService(service).then(
-      () => {
-        navigate('/services');
-      },
-      (e) => {}
-    );
+    await dispatch(updateService(service));
+    navigate('/services');
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
