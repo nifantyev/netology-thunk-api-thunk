@@ -19,7 +19,7 @@ export function getServices(): AppThunk<Promise<void>> {
       }
       const data = await response.json();
       dispatch(putServiceList(data));
-      dispatch(setServiceListLoadingStatus('success'));
+      dispatch(setServiceListLoadingStatus('idle'));
     } catch (e) {
       dispatch(setServiceListLoadingStatus('error'));
     }
@@ -38,7 +38,7 @@ export function getService(id: number): AppThunk<Promise<void>> {
       }
       const data = await response.json();
       dispatch(editService(data));
-      dispatch(setServiceLoadingStatus('success'));
+      dispatch(setServiceLoadingStatus('idle'));
     } catch (e) {
       dispatch(setServiceLoadingStatus('error'));
     }
@@ -62,7 +62,7 @@ export function updateService(service: ServiceFull): AppThunk<Promise<void>> {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      dispatch(setServiceSavingStatus('success'));
+      dispatch(setServiceSavingStatus('idle'));
     } catch (e) {
       dispatch(setServiceSavingStatus('error'));
       throw e;
@@ -83,7 +83,7 @@ export function deleteService(id: number): AppThunk<Promise<void>> {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      dispatch(setServiceDeletingStatus(id, 'success'));
+      dispatch(setServiceDeletingStatus(id, 'idle'));
     } catch (e) {
       dispatch(setServiceDeletingStatus(id, 'error'));
     }
