@@ -8,7 +8,8 @@ import {
   UPDATE_EDIT_SERVICE_PROP,
 } from './actionTypes';
 
-import { AsyncOperationStatus, Service, ServiceFull } from '../types';
+import { AsyncOperationStatus } from '../types';
+import { Service, ServiceFull } from '../models';
 
 export function putServiceList(services: Service[]) {
   return { type: PUT_SERVICE_LIST, payload: services };

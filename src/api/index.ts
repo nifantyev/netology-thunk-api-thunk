@@ -1,5 +1,5 @@
 import { AppThunk } from '../store';
-import { ServiceFull } from '../types';
+import { ServiceFull } from '../models';
 import {
   editService,
   putServiceList,
